@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="logo.png" type="image/png">
+    <title>Buffet Magnus — Catering Corporativo de Excelência</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #8B1A2A;
+            --secondary: #FFFFFF;
+            --accent: #C4A882;
+            --dark: #1A0A0E;
+            --text: #2D1A1E;
+            --bg-light: #FAF8F6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background-color: var(--secondary);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background: #FFFFFF !important;
+            border-bottom: 2px solid #8B1A2A !important;
+            box-shadow: 0 2px 20px rgba(139, 26, 42, 0.08) !important;
+            padding: 8px 5% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 4px 30px rgba(139, 26, 42, 0.12) !important;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 12px 5%;
+        }
+
+        .logo img {
+            height: 65px !important;
+            width: auto !important;
+            object-fit: contain;
+            transition: all 0.4s ease;
+            transform: scaleX(1.4) !important;
+            transform-origin: left center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-family: 'Playfair Display', serif !important;
+            font-size: 0.95rem !important;
+            color: #2D1A1E !important;
+            letter-spacing: 0.03em !important;
+            text-decoration: none !important;
+            position: relative !important;
+            transition: color 0.3s;
+            padding: 5px 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #8B1A2A;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #8B1A2A !important;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #8B1A2A !important;
+            color: #FFFFFF !important;
+            padding: 12px 24px !important;
+            font-size: 0.8rem !important;
+            letter-spacing: 0.08em !important;
+            border-radius: 2px !important;
+            border: none !important;
+            cursor: pointer !important;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.6s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            background: #6b1220;
+            transform: scale(1.02);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+        }
+
+        .btn-ghost:hover {
+            background: white;
+            color: var(--text);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background-color: var(--dark);
+            background-image: url('foto5.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: linear-gradient(135deg, rgba(26, 10, 14, 0.82) 0%, rgba(139, 26, 42, 0.45) 50%, rgba(26, 10, 14, 0.6) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            padding: 0 8%;
+            max-width: 850px;
+            color: white;
+            margin-top: 180px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            background: rgba(26, 10, 14, 0.4);
+            backdrop-filter: blur(8px);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-radius: 30px;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.2;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 .gold-italic {
+            color: var(--accent);
+            font-style: italic;
+            font-size: 4.5rem;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            max-width: 600px;
+            color: #f5f0eb;
+            margin-bottom: 50px;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .stat h3 {
+            color: var(--accent);
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .stat p {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+        }
+
+        /* Ticker */
+        .ticker {
+            background: var(--primary);
+            color: white;
+            padding: 15px 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .ticker-content {
+            display: inline-block;
+            animation: marquee 25s linear infinite;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Services */
+        .services {
+            padding: 100px 0;
+            background: var(--secondary);
+        }
+
+        .section-tag {
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            color: var(--text);
+            line-height: 1.2;
+            margin-bottom: 60px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border: 1px solid rgba(139, 26, 42, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border-left: 3px solid transparent;
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            border-left-color: var(--primary);
+        }
+
+        .service-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .service-info {
+            padding: 30px;
+        }
+
+        .service-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .service-info p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .service-link {
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        /* Photo Feature */
+        .feature {
+            height: 70vh;
+            background: url('foto5.jpeg') center/cover fixed;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .feature-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(26, 10, 14, 0.65);
+        }
+
+        .feature-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            padding: 0 5%;
+        }
+
+        .feature-line {
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+            margin: 30px auto;
+        }
+
+        .feature blockquote {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            font-weight: 400;
+        }
+
+        /* Gallery */
+        .gallery {
+            padding: 100px 0;
+            background: var(--dark);
+            overflow: hidden;
+        }
+
+        .gallery .section-title {
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .filmstrip-container {
+            cursor: grab;
+            overflow: hidden;
+            padding: 20px 0;
+            width: 100%;
+            padding-left: 5%;
+        }
+
+        .filmstrip-container:active {
+            cursor: grabbing;
+        }
+
+        .filmstrip {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+        }
+
+        .gallery-item {
+            width: 360px;
+            height: 280px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.4s ease;
+            flex-shrink: 0;
+            border: 2px solid transparent;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            pointer-events: none;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(26, 10, 14, 0.9), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 25px;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            border-color: var(--primary);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay span {
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+        }
+
+        /* How it Works */
+        .how-it-works {
+            padding: 100px 0;
+            background: var(--bg-light);
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary) 10%, var(--primary) 90%, transparent);
+            border-bottom: 2px dashed var(--bg-light);
+            z-index: 0;
+        }
+
+        .step {
+            width: 22%;
+            position: relative;
+            z-index: 1;
+            background: var(--bg-light);
+            padding-top: 10px;
+        }
+
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .step h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background: var(--secondary);
+            text-align: center;
+        }
+
+        .testi-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            height: 250px;
+        }
+
+        .testimonial {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .testimonial.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .quote-mark {
+            font-size: 4rem;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .testimonial p {
+            font-size: 1.5rem;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .testi-author {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .stars {
+            color: var(--accent);
+            letter-spacing: 2px;
+        }
+
+        /* CTA Final */
+        .cta-final {
+            background: var(--primary);
+            position: relative;
+            padding: 100px 0;
+            overflow: hidden;
+        }
+
+        .cta-pattern {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.03) 10px, rgba(255, 255, 255, 0.03) 20px);
+        }
+
+        .cta-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+            gap: 50px;
+        }
+
+        .cta-text {
+            color: white;
+            flex: 1;
+        }
+
+        .cta-text h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .cta-text p {
+            font-size: 0.95rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 400px;
+            line-height: 1.5;
+        }
+
+        .cta-cards {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-card {
+            background: var(--dark);
+            padding: 25px;
+            border-radius: 8px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 500;
+        }
+
+        .cta-note {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-col p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+
+        .footer-bottom span {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        .hamburger-btn {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 101;
+        }
+
+        .hamburger-btn span {
+            width: 25px;
+            height: 2px;
+            background: #8B1A2A;
+            margin: 3px 0;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background: #FFFFFF;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .mobile-menu-overlay a {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #2D1A1E;
+            text-decoration: none;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 2.5rem;
+            background: none;
+            border: none;
+            color: #8B1A2A;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .timeline::before {
+                display: none;
+            }
+
+            .step {
+                width: 100%;
+                display: flex;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .step-icon {
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+
+            .cta-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cta-text p {
+                margin: 0 auto 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body { overflow-x: hidden; }
+            * { box-sizing: border-box; }
+            img, video { max-width: 100%; }
+
+            /* Nav */
+            nav {
+                padding: 10px 5% !important;
+                height: auto !important;
+            }
+            .logo img {
+                height: 60px !important;
+                transform: none !important;
+            }
+            .nav-links, .nav > .btn-primary {
+                display: none !important;
+            }
+            #navbar .btn-primary {
+                display: none !important;
+            }
+            .hamburger-btn {
+                display: flex !important;
+            }
+
+            /* Hero */
+            .hero {
+                min-height: 100svh;
+                padding: 120px 20px 60px;
+                display: flex;
+                align-items: flex-start;
+            }
+            .hero-content {
+                margin-top: 0;
+                padding: 0;
+                max-width: 100%;
+            }
+            .hero h1 {
+                font-size: clamp(2rem, 7vw, 3rem);
+            }
+            .hero h1 .gold-italic {
+                font-size: clamp(2.2rem, 8vw, 3.5rem);
+            }
+            .hero p {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+            .hero-ctas {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .hero-ctas .btn {
+                width: 100%;
+                text-align: center;
+            }
+            .hero-stats {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+                text-align: center;
+            }
+            .stat h3 { font-size: 1.2rem; }
+            .stat p { font-size: 0.6rem; }
+
+            /* Services */
+            .services {
+                padding: 60px 20px;
+            }
+            .section-title {
+                font-size: clamp(1.6rem, 6vw, 2.2rem);
+                margin-bottom: 40px;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .service-card div[style*="height:200px"] {
+                height: 200px !important;
+            }
+
+            /* Photo Feature */
+            .feature {
+                background-attachment: scroll;
+                height: auto;
+                padding: 80px 20px;
+            }
+            .feature blockquote {
+                font-size: 1.6rem;
+            }
+
+            /* Gallery */
+            .gallery-item {
+                min-width: 280px;
+                height: 220px;
+            }
+            .filmstrip-container {
+                padding: 0 20px;
+            }
+
+            /* How it Works */
+            .timeline {
+                flex-direction: column;
+                gap: 30px;
+                padding-left: 20px;
+                border-left: 2px solid #8B1A2A;
+                margin-left: 10px;
+            }
+            .timeline::before { display: none; }
+            .step {
+                width: 100%;
+                text-align: left;
+                padding-left: 0;
+            }
+
+            /* Testimonials */
+            .testimonials {
+                padding: 60px 20px;
+            }
+            .testimonial p {
+                font-size: 1.2rem;
+            }
+
+            /* CTA Final */
+            .cta-final {
+                padding: 60px 20px;
+            }
+            .cta-container {
+                flex-direction: column;
+                gap: 40px;
+            }
+            .cta-text h2 { font-size: 1.8rem; }
+            .cta-cards {
+                width: 100%;
+            }
+            .contact-card {
+                width: 100%;
+            }
+            .cta-text .btn {
+                width: 100%;
+            }
+
+            /* Footer */
+            footer {
+                padding: 40px 20px;
+                text-align: center;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .footer-col, .footer-col:last-child {
+                text-align: center !important;
+            }
+            .footer-links {
+                align-items: center !important;
+            }
+
+            /* General */
+            .btn, a, button {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            body, p, span, a {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav id="navbar">
+        <div class="logo">
+            <a href="#inicio"><img src="logo.png" alt="Buffet Magnus"></a>
+        </div>
+        <div class="nav-links">
+            <a href="#inicio">Início</a>
+            <a href="#servicos">Serviços</a>
+            <a href="#galeria">Galeria</a>
+            <a href="#como-funciona">Como Funciona</a>
+            <a href="#contato">Contato</a>
+        </div>
+        <a href="https://wa.me/5521988341017" target="_blank" class="btn btn-primary">SOLICITAR ORÇAMENTO</a>
+        <button id="hamburger" class="hamburger-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <div id="mobile-menu" class="mobile-menu-overlay">
+        <button id="close-menu" class="close-btn">✕</button>
+        <a href="#inicio">Início</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#como-funciona">Como Funciona</a>
+        <a href="#contato">Contato</a>
+        <a href="https://wa.me/5521988341017" target="_blank" class="btn btn-primary" style="margin-top: 20px;">SOLICITAR ORÇAMENTO</a>
+    </div>
+
+    <section id="inicio" class="hero">
+        <video class="hero-video" src="hero-magnus.mp4" autoplay muted loop playsinline></video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="badge fade-up">✦ Há mais de 5 anos alimentando empresas</div>
+            <h1 class="fade-up" style="transition-delay: 0.1s;">Seu evento merece <br>um buffet à <span
+                    class="gold-italic">altura da ocasião.</span></h1>
+            <p class="fade-up" style="transition-delay: 0.2s;">Do café da manhã ao almoço executivo — cardápios
+                completos, montagem no seu espaço e atendimento impecável.</p>
+            <div class="hero-ctas fade-up" style="transition-delay: 0.3s;">
+                <a href="https://wa.me/5521988341017" target="_blank" class="btn btn-primary">PEDIR ORÇAMENTO AGORA</a>
+                <a href="#galeria" class="btn btn-ghost">Ver nossos eventos ↓</a>
+            </div>
+            <div class="hero-stats fade-up" style="transition-delay: 0.4s;">
+                <div class="stat">
+                    <h3 class="counter" data-target="500">0</h3>
+                    <p>Eventos Realizados</p>
+                </div>
+                <div class="stat">
+                    <h3 class="counter" data-target="5">0</h3>
+                    <p>Anos de Experiência</p>
+                </div>
+                <div class="stat">
+                    <h3>100%</h3>
+                    <p>Satisfação Garantida</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="ticker">
+        <div class="ticker-content">
+            CAFÉ DA MANHÃ ✦ COFFEE BREAK ✦ ALMOÇO EXECUTIVO ✦ COQUETEL ✦ EVENTOS CORPORATIVOS ✦ RIO DE JANEIRO ✦
+            CARDÁPIO PERSONALIZADO ✦ MONTAGEM NO LOCAL ✦ CAFÉ DA MANHÃ ✦ COFFEE BREAK ✦ ALMOÇO EXECUTIVO ✦ COQUETEL ✦
+            EVENTOS CORPORATIVOS ✦ RIO DE JANEIRO ✦ CARDÁPIO PERSONALIZADO ✦ MONTAGEM NO LOCAL ✦
+        </div>
+    </div>
+
+    <section id="servicos" class="services">
+        <div class="container">
+            <span class="section-tag fade-up">NOSSOS SERVIÇOS</span>
+            <h2 class="section-title fade-up">Soluções completas para<br>cada tipo de evento</h2>
+
+            <div class="services-grid">
+                <div class="service-card fade-up">
+                    <div style="height:200px;overflow:hidden;position:relative;">
+                        <video autoplay muted loop playsinline
+                            style="width:100%;height:100%;object-fit:cover;display:block;">
+                            <source src="coffee1-magnus.mp4" type="video/mp4">
+                        </video>
+                        <img src="foto1.jpeg"
+                            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;">
+                    </div>
+                    <div class="service-info">
+                        <h3 class="playfair">Café da Manhã Executivo</h3>
+                        <p>Café, sucos naturais, salgados e doces. Montagem completa no espaço da sua empresa.</p>
+                        <a href="https://wa.me/5521988341017" target="_blank" class="service-link">Saiba mais →</a>
+                    </div>
+                </div>
+                <div class="service-card fade-up" style="transition-delay: 0.1s;">
+                    <div style="height:200px;overflow:hidden;position:relative;">
+                        <video autoplay muted loop playsinline
+                            style="width:100%;height:100%;object-fit:cover;display:block;">
+                            <source src="coffee-magnus.mp4" type="video/mp4">
+                        </video>
+                        <img src="foto2.jpeg"
+                            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;">
+                    </div>
+                    <div class="service-info">
+                        <h3 class="playfair">Coffee Break</h3>
+                        <p>Finger foods variados, bebidas quentes e frias. Ideal para intervalos de reuniões e
+                            treinamentos.</p>
+                        <a href="https://wa.me/5521988341017" target="_blank" class="service-link">Saiba mais →</a>
+                    </div>
+                </div>
+                <div class="service-card fade-up" style="transition-delay: 0.2s;">
+                    <div style="height:200px;overflow:hidden;position:relative;">
+                        <video autoplay muted loop playsinline
+                            style="width:100%;height:100%;object-fit:cover;display:block;">
+                            <source src="almoco-magnus.mp4" type="video/mp4">
+                        </video>
+                        <img src="foto4.jpeg"
+                            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;">
+                    </div>
+                    <div class="service-info">
+                        <h3 class="playfair">Almoço Corporativo</h3>
+                        <p>Buffet completo com pratos quentes, saladas e sobremesas. Atendemos grupos de qualquer
+                            tamanho.</p>
+                        <a href="https://wa.me/5521988341017" target="_blank" class="service-link">Saiba mais →</a>
+                    </div>
+                </div>
+                <div class="service-card fade-up" style="transition-delay: 0.3s;">
+                    <div style="height:200px;overflow:hidden;position:relative;">
+                        <video autoplay muted loop playsinline
+                            style="width:100%;height:100%;object-fit:cover;display:block;">
+                            <source src="coquetel-magnus.mp4" type="video/mp4">
+                        </video>
+                        <img src="foto2.jpeg"
+                            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;">
+                    </div>
+                    <div class="service-info">
+                        <h3 class="playfair">Coquetéis e Eventos</h3>
+                        <p>Para lançamentos, confraternizações e celebrações empresariais. Cardápio sob medida.</p>
+                        <a href="https://wa.me/5521988341017" target="_blank" class="service-link">Saiba mais →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature">
+        <div class="feature-overlay"></div>
+        <div class="feature-content fade-up">
+            <div class="feature-line"></div>
+            <blockquote>
+                <i>"Cada detalhe pensado para que<br>você só precise se preocupar<br>com os seus convidados."</i>
+            </blockquote>
+            <div class="feature-line"></div>
+        </div>
+    </section>
+
+    <section id="galeria" class="gallery">
+        <div class="container">
+            <span class="section-tag fade-up" style="color: var(--primary);">NOSSA GALERIA</span>
+            <h2 class="section-title fade-up">Eventos que realizamos</h2>
+        </div>
+        <div class="filmstrip-container" id="filmstripContainer">
+            <div class="filmstrip" id="filmstrip">
+                <div class="gallery-item">
+                    <img src="foto1.jpeg" alt="Evento 1">
+                    <div class="gallery-overlay"><span>Café da Manhã Executivo</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="foto2.jpeg" alt="Evento 2">
+                    <div class="gallery-overlay"><span>Coffee Break Corporativo</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="foto3.jpeg" alt="Evento 3">
+                    <div class="gallery-overlay"><span>Confraternização</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="foto4.jpeg" alt="Evento 4">
+                    <div class="gallery-overlay"><span>Almoço Empresarial</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="foto5.jpeg" alt="Evento 5">
+                    <div class="gallery-overlay"><span>Lançamento de Produto</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="como-funciona" class="how-it-works">
+        <div class="container">
+            <span class="section-tag fade-up">COMO FUNCIONA</span>
+            <h2 class="section-title fade-up" style="margin-bottom: 20px;">Simples assim</h2>
+
+            <div class="timeline">
+                <div class="step fade-up">
+                    <div class="step-icon">📋</div>
+                    <div>
+                        <h3 class="playfair">Orçamento</h3>
+                        <p>Preencha o formulário ou nos chame no WhatsApp. Resposta em até 2 horas.</p>
+                    </div>
+                </div>
+                <div class="step fade-up" style="transition-delay: 0.15s;">
+                    <div class="step-icon">🤝</div>
+                    <div>
+                        <h3 class="playfair">Cardápio</h3>
+                        <p>Montamos o cardápio ideal para o seu evento e número de pessoas.</p>
+                    </div>
+                </div>
+                <div class="step fade-up" style="transition-delay: 0.3s;">
+                    <div class="step-icon">🚚</div>
+                    <div>
+                        <h3 class="playfair">Montagem</h3>
+                        <p>Chegamos no horário, montamos tudo e cuidamos de cada detalhe.</p>
+                    </div>
+                </div>
+                <div class="step fade-up" style="transition-delay: 0.45s;">
+                    <div class="step-icon">✅</div>
+                    <div>
+                        <h3 class="playfair">Seu Evento</h3>
+                        <p>Você aproveita. Nós cuidamos do buffet do início ao fim.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title fade-up">O que dizem nossos clientes</h2>
+
+            <div class="testi-container fade-up">
+                <div class="testimonial active">
+                    <div class="quote-mark">“</div>
+                    <p>"Pontualidade e qualidade impecáveis. Já utilizamos o Magnus em 3 eventos corporativos."</p>
+                    <div class="testi-author">— Gerente RH, Empresa de Tecnologia, RJ</div>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div class="testimonial">
+                    <div class="quote-mark">“</div>
+                    <p>"O café da manhã foi um sucesso total. Tudo fresco, bonito e saboroso."</p>
+                    <div class="testi-author">— Coordenadora de Eventos, Banco Federal</div>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div class="testimonial">
+                    <div class="quote-mark">“</div>
+                    <p>"Equipe profissional, atenciosa e o melhor custo-benefício que encontramos."</p>
+                    <div class="testi-author">— Diretora Administrativa, Escritório de Advocacia</div>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="cta-final">
+        <div class="cta-pattern"></div>
+        <div class="cta-container">
+            <div class="cta-text fade-up">
+                <h2 class="playfair">Pronto para criar um<br>evento inesquecível?</h2>
+                <p>Entre em contato agora e receba um orçamento personalizado em até 2 horas.</p>
+                <a href="https://wa.me/5521988341017" target="_blank" class="btn"
+                    style="background: white; color: var(--primary);">SOLICITAR ORÇAMENTO →</a>
+            </div>
+            <div class="cta-cards fade-up" style="transition-delay: 0.2s;">
+                <div class="contact-card">
+                    <span style="font-size: 1.5rem;">📞</span>
+                    <div>Ligue agora — (21) 98834-1017</div>
+                </div>
+                <a href="https://wa.me/5521988341017" target="_blank" class="contact-card"
+                    style="text-decoration: none;">
+                    <span style="font-size: 1.5rem;">💬</span>
+                    <div>WhatsApp — Resposta imediata</div>
+                </a>
+                <div class="cta-note">Atendemos Rio de Janeiro e Grande Rio</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <img src="logo.png" alt="Buffet Magnus" style="height: 80px; margin-bottom: 15px;">
+                    <p>Sofisticado mas acessível. O buffet ideal para o seu evento corporativo no Rio de Janeiro.</p>
+                </div>
+                <div class="footer-col" style="text-align: center;">
+                    <h4 class="playfair" style="margin-bottom: 20px; font-size: 1.2rem;">Links Rápidos</h4>
+                    <div class="footer-links">
+                        <a href="#inicio">Início</a>
+                        <a href="#servicos">Serviços</a>
+                        <a href="#galeria">Galeria</a>
+                        <a href="#contato">Contato</a>
+                    </div>
+                </div>
+                <div class="footer-col" style="text-align: right;">
+                    <h4 class="playfair" style="margin-bottom: 20px; font-size: 1.2rem;">Contato</h4>
+                    <div class="footer-links" style="align-items: flex-end;">
+                        <a href="mailto:contato@buffetmagnus.com.br">contato@buffetmagnus.com.br</a>
+                        <a href="tel:+5521988341017">(21) 98834-1017</a>
+                        <span>Rio de Janeiro, RJ</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2025 Buffet Magnus · Desenvolvido por <span>Rastro Studio</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        // Navbar Scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+        });
+
+        // Hero Video Speed
+        const heroVideo = document.querySelector('.hero-video');
+        if (heroVideo) {
+            heroVideo.playbackRate = 0.85;
+        }
+
+        // Mobile Menu
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenu = document.getElementById('close-menu');
+
+        if (hamburger && mobileMenu) {
+            hamburger.addEventListener('click', () => {
+                mobileMenu.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+            closeMenu.addEventListener('click', () => {
+                mobileMenu.style.display = 'none';
+                document.body.style.overflow = '';
+            });
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.style.display = 'none';
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+
+        // Intersection Observer (Fade Up)
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+
+                    // Counter Animation
+                    if (entry.target.classList.contains('hero-stats')) {
+                        const counters = document.querySelectorAll('.counter');
+                        counters.forEach(counter => {
+                            const updateCount = () => {
+                                const target = +counter.getAttribute('data-target');
+                                const count = +counter.innerText.replace('+', '');
+                                const inc = target / 40;
+                                if (count < target) {
+                                    counter.innerText = Math.ceil(count + inc) + (target > 100 ? '+' : '+');
+                                    setTimeout(updateCount, 40);
+                                } else {
+                                    counter.innerText = target + '+';
+                                }
+                            };
+                            updateCount();
+                        });
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Testimonials Auto-rotate
+        const testimonials = document.querySelectorAll('.testimonial');
+        let currentTesti = 0;
+        setInterval(() => {
+            testimonials[currentTesti].classList.remove('active');
+            currentTesti = (currentTesti + 1) % testimonials.length;
+            testimonials[currentTesti].classList.add('active');
+        }, 4000);
+
+        // Filmstrip Drag Scroll
+        const slider = document.getElementById('filmstripContainer');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.style.cursor = 'grabbing';
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.style.cursor = 'grab';
+        });
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.style.cursor = 'grab';
+        });
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2;
+            slider.scrollLeft = scrollLeft - walk;
+        });
+    </script>
+</body>
+
+</html>
