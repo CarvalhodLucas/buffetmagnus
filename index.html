@@ -441,6 +441,50 @@
             padding: 100px 0;
             background: var(--dark);
             overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-nav {
+            position: absolute;
+            top: 60%;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 3%;
+            pointer-events: none;
+            z-index: 20;
+            transform: translateY(-50%);
+        }
+
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border: 1px solid #8B1A2A;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            pointer-events: auto;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            color: #8B1A2A;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .nav-btn:hover {
+            background: #8B1A2A;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .gallery-nav {
+                display: none;
+            }
         }
 
         .gallery .section-title {
@@ -857,7 +901,7 @@
                 height: auto !important;
             }
             .logo img {
-                height: 60px !important;
+                height: 72px !important;
                 transform: none !important;
             }
             .nav-links, .nav > .btn-primary {
@@ -873,41 +917,69 @@
             /* Hero */
             .hero {
                 min-height: 100svh;
-                padding: 120px 20px 60px;
+                padding: 100px 20px 40px !important;
                 display: flex;
-                align-items: flex-start;
+                align-items: center !important;
             }
             .hero-content {
                 margin-top: 0;
                 padding: 0;
                 max-width: 100%;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            .hero .badge {
+                display: none !important;
             }
             .hero h1 {
-                font-size: clamp(2rem, 7vw, 3rem);
+                font-size: clamp(2rem, 8vw, 2.5rem) !important;
+                line-height: 1.1 !important;
+                margin-bottom: 15px !important;
+                text-align: center;
             }
             .hero h1 .gold-italic {
-                font-size: clamp(2.2rem, 8vw, 3.5rem);
+                font-size: clamp(2.4rem, 9vw, 3rem) !important;
+                margin-top: 5px;
+                display: block;
             }
-            .hero p {
-                font-size: 0.9rem;
-                line-height: 1.6;
+            .hero-content > p {
+                display: none !important;
             }
             .hero-ctas {
+                display: flex;
                 flex-direction: column;
-                gap: 15px;
-            }
-            .hero-ctas .btn {
+                gap: 12px;
+                margin-top: 25px;
                 width: 100%;
+            }
+            .hero .btn-primary, .hero .btn-ghost {
+                padding: 14px 20px !important;
+                font-size: 0.9rem !important;
+                margin-bottom: 0 !important;
+                width: 100%;
+                justify-content: center;
                 text-align: center;
             }
             .hero-stats {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
-                gap: 15px;
+                gap: 10px;
                 text-align: center;
+                margin-top: 40px;
+                width: 100%;
             }
-            .stat h3 { font-size: 1.2rem; }
-            .stat p { font-size: 0.6rem; }
+            .stat h3 { 
+                font-size: 1.6rem !important; 
+                margin-bottom: 5px;
+            }
+            .stat p { 
+                display: block !important;
+                font-size: 0.8rem !important; 
+                line-height: 1.2;
+                color: white;
+            }
 
             /* Services */
             .services {
@@ -1172,7 +1244,11 @@
             <span class="section-tag fade-up" style="color: var(--primary);">NOSSA GALERIA</span>
             <h2 class="section-title fade-up">Eventos que realizamos</h2>
         </div>
-        <div class="filmstrip-container" id="filmstripContainer">
+        <div class="filmstrip-container" id="filmstripContainer" style="position: relative;">
+            <div class="gallery-nav">
+                <button class="nav-btn prev" id="btnPrev">←</button>
+                <button class="nav-btn next" id="btnNext">→</button>
+            </div>
             <div class="filmstrip" id="filmstrip">
                 <div class="gallery-item">
                     <img src="foto1.jpeg" alt="Evento 1">
@@ -1426,6 +1502,20 @@
             const walk = (x - startX) * 2;
             slider.scrollLeft = scrollLeft - walk;
         });
+
+        // Gallery Buttons
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+        const fContainer = document.getElementById('filmstripContainer');
+
+        if (btnPrev && btnNext) {
+            btnPrev.addEventListener('click', () => {
+                fContainer.scrollBy({ left: -400, behavior: 'smooth' });
+            });
+            btnNext.addEventListener('click', () => {
+                fContainer.scrollBy({ left: 400, behavior: 'smooth' });
+            });
+        }
     </script>
 </body>
 
