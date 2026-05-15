@@ -458,27 +458,48 @@
         }
 
         .nav-btn {
-            width: 50px;
-            height: 50px;
-            background: white;
-            border: 1px solid #8B1A2A;
+            width: 54px;
+            height: 54px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             pointer-events: auto;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-            color: #8B1A2A;
-            font-size: 1.2rem;
-            font-weight: bold;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            color: white;
+            opacity: 1;
+        }
+
+        .nav-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         .nav-btn:hover {
             background: #8B1A2A;
-            color: white;
-            transform: scale(1.1);
+            border-color: #8B1A2A;
+            transform: scale(1.15);
+            box-shadow: 0 12px 40px rgba(139, 26, 42, 0.3);
+        }
+
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .nav-btn.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.8);
         }
 
         @media (max-width: 768px) {
@@ -917,7 +938,7 @@
             /* Hero */
             .hero {
                 min-height: 100svh;
-                padding: 100px 20px 40px !important;
+                padding: 280px 20px 80px !important;
                 display: flex;
                 align-items: center !important;
             }
@@ -934,13 +955,13 @@
                 display: none !important;
             }
             .hero h1 {
-                font-size: clamp(2rem, 8vw, 2.5rem) !important;
+                font-size: clamp(2.4rem, 10vw, 3rem) !important;
                 line-height: 1.1 !important;
-                margin-bottom: 15px !important;
+                margin-bottom: 20px !important;
                 text-align: center;
             }
             .hero h1 .gold-italic {
-                font-size: clamp(2.4rem, 9vw, 3rem) !important;
+                font-size: clamp(2.8rem, 12vw, 3.6rem) !important;
                 margin-top: 5px;
                 display: block;
             }
@@ -1246,8 +1267,12 @@
         </div>
         <div class="filmstrip-container" id="filmstripContainer" style="position: relative;">
             <div class="gallery-nav">
-                <button class="nav-btn prev" id="btnPrev">←</button>
-                <button class="nav-btn next" id="btnNext">→</button>
+                <button class="nav-btn prev hidden" id="btnPrev">
+                    <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <button class="nav-btn next" id="btnNext">
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
             </div>
             <div class="filmstrip" id="filmstrip">
                 <div class="gallery-item">
@@ -1509,12 +1534,29 @@
         const fContainer = document.getElementById('filmstripContainer');
 
         if (btnPrev && btnNext) {
+            const updateButtons = () => {
+                const scrollLeft = fContainer.scrollLeft;
+                const maxScroll = fContainer.scrollWidth - fContainer.clientWidth;
+                
+                if (scrollLeft <= 10) btnPrev.classList.add('hidden');
+                else btnPrev.classList.remove('hidden');
+                
+                if (scrollLeft >= maxScroll - 10) btnNext.classList.add('hidden');
+                else btnNext.classList.remove('hidden');
+            };
+
+            fContainer.addEventListener('scroll', updateButtons);
+            window.addEventListener('resize', updateButtons);
+
             btnPrev.addEventListener('click', () => {
-                fContainer.scrollBy({ left: -400, behavior: 'smooth' });
+                fContainer.scrollBy({ left: -450, behavior: 'smooth' });
             });
             btnNext.addEventListener('click', () => {
-                fContainer.scrollBy({ left: 400, behavior: 'smooth' });
+                fContainer.scrollBy({ left: 450, behavior: 'smooth' });
             });
+            
+            // Initial check
+            updateButtons();
         }
     </script>
 </body>
