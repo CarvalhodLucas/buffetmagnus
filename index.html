@@ -470,20 +470,16 @@
         .ticker-wrapper {
             overflow: hidden;
             margin-bottom: 16px;
-            mask-image: linear-gradient(
-                to right,
-                transparent 0%,
-                black 8%,
-                black 92%,
-                transparent 100%
-            );
-            -webkit-mask-image: linear-gradient(
-                to right,
-                transparent 0%,
-                black 8%,
-                black 92%,
-                transparent 100%
-            );
+            mask-image: linear-gradient(to right,
+                    transparent 0%,
+                    black 8%,
+                    black 92%,
+                    transparent 100%);
+            -webkit-mask-image: linear-gradient(to right,
+                    transparent 0%,
+                    black 8%,
+                    black 92%,
+                    transparent 100%);
         }
 
         .ticker-track {
@@ -513,13 +509,23 @@
         }
 
         @keyframes scrollLeft {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
         }
 
         @keyframes scrollRight {
-            0% { transform: translateX(-50%); }
-            100% { transform: translateX(0); }
+            0% {
+                transform: translateX(-50%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
         }
 
         .track-left {
@@ -537,7 +543,7 @@
         .ticker-item .overlay {
             position: absolute;
             inset: 0;
-            background: rgba(139,26,42,0.70);
+            background: rgba(139, 26, 42, 0.70);
             opacity: 0;
             transition: opacity 0.4s ease;
             display: flex;
@@ -547,7 +553,9 @@
             padding: 20px;
         }
 
-        .ticker-item:hover .overlay { opacity: 1; }
+        .ticker-item:hover .overlay {
+            opacity: 1;
+        }
 
         .ticker-item .overlay span {
             font-family: 'Cormorant Garamond', serif;
@@ -563,7 +571,9 @@
                 width: 240px;
                 height: 180px;
             }
-            .track-left, .track-right {
+
+            .track-left,
+            .track-right {
                 animation-duration: 18s;
             }
         }
@@ -904,25 +914,39 @@
         }
 
         @media (max-width: 768px) {
-            body { overflow-x: hidden; }
-            * { box-sizing: border-box; }
-            img, video { max-width: 100%; }
+            body {
+                overflow-x: hidden;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            img,
+            video {
+                max-width: 100%;
+            }
 
             /* Nav */
             nav {
                 padding: 10px 5% !important;
                 height: auto !important;
             }
+
             .logo img {
                 height: 72px !important;
                 transform: none !important;
             }
-            .nav-links, .nav > .btn-primary {
+
+            .nav-links,
+            .nav>.btn-primary {
                 display: none !important;
             }
+
             #navbar .btn-primary {
                 display: none !important;
             }
+
             .hamburger-btn {
                 display: flex !important;
             }
@@ -934,6 +958,7 @@
                 display: flex;
                 align-items: center !important;
             }
+
             .hero-content {
                 margin-top: 0;
                 padding: 0;
@@ -943,23 +968,28 @@
                 flex-direction: column;
                 justify-content: center;
             }
+
             .hero .badge {
                 display: none !important;
             }
+
             .hero h1 {
                 font-size: clamp(2.4rem, 10vw, 3rem) !important;
                 line-height: 1.1 !important;
                 margin-bottom: 20px !important;
                 text-align: center;
             }
+
             .hero h1 .gold-italic {
                 font-size: clamp(2.8rem, 12vw, 3.6rem) !important;
                 margin-top: 5px;
                 display: block;
             }
-            .hero-content > p {
+
+            .hero-content>p {
                 display: none !important;
             }
+
             .hero-ctas {
                 display: flex;
                 flex-direction: column;
@@ -967,7 +997,9 @@
                 margin-top: 25px;
                 width: 100%;
             }
-            .hero .btn-primary, .hero .btn-ghost {
+
+            .hero .btn-primary,
+            .hero .btn-ghost {
                 padding: 14px 20px !important;
                 font-size: 0.9rem !important;
                 margin-bottom: 0 !important;
@@ -975,6 +1007,7 @@
                 justify-content: center;
                 text-align: center;
             }
+
             .hero-stats {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
@@ -983,13 +1016,15 @@
                 margin-top: 40px;
                 width: 100%;
             }
-            .stat h3 { 
-                font-size: 1.6rem !important; 
+
+            .stat h3 {
+                font-size: 1.6rem !important;
                 margin-bottom: 5px;
             }
-            .stat p { 
+
+            .stat p {
                 display: block !important;
-                font-size: 0.8rem !important; 
+                font-size: 0.8rem !important;
                 line-height: 1.2;
                 color: white;
             }
@@ -998,13 +1033,16 @@
             .services {
                 padding: 60px 20px;
             }
+
             .section-title {
                 font-size: clamp(1.6rem, 6vw, 2.2rem);
                 margin-bottom: 40px;
             }
+
             .services-grid {
                 grid-template-columns: 1fr;
             }
+
             .service-card div[style*="height:200px"] {
                 height: 200px !important;
             }
@@ -1015,6 +1053,7 @@
                 height: auto;
                 padding: 80px 20px;
             }
+
             .feature blockquote {
                 font-size: 1.6rem;
             }
@@ -1024,6 +1063,7 @@
                 min-width: 280px;
                 height: 220px;
             }
+
             .filmstrip-container {
                 padding: 0 20px;
             }
@@ -1036,7 +1076,11 @@
                 border-left: 2px solid #8B1A2A;
                 margin-left: 10px;
             }
-            .timeline::before { display: none; }
+
+            .timeline::before {
+                display: none;
+            }
+
             .step {
                 width: 100%;
                 text-align: left;
@@ -1047,6 +1091,7 @@
             .testimonials {
                 padding: 60px 20px;
             }
+
             .testimonial p {
                 font-size: 1.2rem;
             }
@@ -1055,17 +1100,24 @@
             .cta-final {
                 padding: 60px 20px;
             }
+
             .cta-container {
                 flex-direction: column;
                 gap: 40px;
             }
-            .cta-text h2 { font-size: 1.8rem; }
+
+            .cta-text h2 {
+                font-size: 1.8rem;
+            }
+
             .cta-cards {
                 width: 100%;
             }
+
             .contact-card {
                 width: 100%;
             }
+
             .cta-text .btn {
                 width: 100%;
             }
@@ -1075,25 +1127,35 @@
                 padding: 40px 20px;
                 text-align: center;
             }
+
             .footer-grid {
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
-            .footer-col, .footer-col:last-child {
+
+            .footer-col,
+            .footer-col:last-child {
                 text-align: center !important;
             }
+
             .footer-links {
                 align-items: center !important;
             }
 
             /* General */
-            .btn, a, button {
+            .btn,
+            a,
+            button {
                 min-height: 44px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
             }
-            body, p, span, a {
+
+            body,
+            p,
+            span,
+            a {
                 font-size: 14px;
             }
         }
@@ -1128,7 +1190,8 @@
         <a href="#galeria">Galeria</a>
         <a href="#como-funciona">Como Funciona</a>
         <a href="#contato">Contato</a>
-        <a href="https://wa.me/5521988341017" target="_blank" class="btn btn-primary" style="margin-top: 20px;">SOLICITAR ORÇAMENTO</a>
+        <a href="https://wa.me/5521988341017" target="_blank" class="btn btn-primary"
+            style="margin-top: 20px;">SOLICITAR ORÇAMENTO</a>
     </div>
 
     <section id="inicio" class="hero">
@@ -1194,15 +1257,15 @@
                     <div style="height:200px;overflow:hidden;position:relative;">
                         <video autoplay muted loop playsinline
                             style="width:100%;height:100%;object-fit:cover;display:block;">
-                            <source src="coffee-magnus.mp4" type="video/mp4">
+                            <source src="churras.mp4" type="video/mp4">
                         </video>
                         <img src="foto2.jpeg"
                             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;">
                     </div>
                     <div class="service-info">
-                        <h3 class="playfair">Coffee Break</h3>
-                        <p>Finger foods variados, bebidas quentes e frias. Ideal para intervalos de reuniões e
-                            treinamentos.</p>
+                        <h3 class="playfair">Eventos Especiais</h3>
+                        <p>Churrasco executivo, festa junina, confraternização de fim de ano e celebrações sob medida.
+                            Planejamos cada detalhe para tornar seu evento inesquecível.</p>
                         <a href="https://wa.me/5521988341017" target="_blank" class="service-link">Saiba mais →</a>
                     </div>
                 </div>
@@ -1216,7 +1279,7 @@
                             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;">
                     </div>
                     <div class="service-info">
-                        <h3 class="playfair">Almoço Corporativo</h3>
+                        <h3 class="playfair">Almoço e Jantar Corporativo</h3>
                         <p>Buffet completo com pratos quentes, saladas e sobremesas. Atendemos grupos de qualquer
                             tamanho.</p>
                         <a href="https://wa.me/5521988341017" target="_blank" class="service-link">Saiba mais →</a>
@@ -1267,34 +1330,74 @@
         <div class="ticker-wrapper fade-up">
             <div class="ticker-track track-left">
                 <!-- fotos duplicadas para loop infinito -->
-                <div class="ticker-item"><img src="images/foto1.jpg" alt="Coquetel"><div class="overlay"><span>Coquetel</span></div></div>
-                <div class="ticker-item"><img src="images/foto2.jpg" alt="Coffee Break"><div class="overlay"><span>Coffee Break</span></div></div>
-                <div class="ticker-item"><img src="images/foto3.jpg" alt="Catering Premium"><div class="overlay"><span>Catering Premium</span></div></div>
-                <div class="ticker-item"><img src="images/foto4.jpg" alt="Evento Exclusivo"><div class="overlay"><span>Evento Exclusivo</span></div></div>
-                <div class="ticker-item"><img src="images/foto5.jpg" alt="Finger Food"><div class="overlay"><span>Finger Food</span></div></div>
+                <div class="ticker-item"><img src="images/foto1.jpg" alt="Coquetel">
+                    <div class="overlay"><span>Coquetel</span></div>
+                </div>
+                <div class="ticker-item"><img src="images/foto2.jpg" alt="Coffee Break">
+                    <div class="overlay"><span>Coffee Break</span></div>
+                </div>
+                <div class="ticker-item"><img src="images/foto3.jpg" alt="Catering Premium">
+                    <div class="overlay"><span>Catering Premium</span></div>
+                </div>
+                <div class="ticker-item"><img src="images/foto4.jpg" alt="Evento Exclusivo">
+                    <div class="overlay"><span>Evento Exclusivo</span></div>
+                </div>
+                <div class="ticker-item"><img src="images/foto5.jpg" alt="Finger Food">
+                    <div class="overlay"><span>Finger Food</span></div>
+                </div>
                 <!-- duplicar as mesmas fotos para loop contínuo -->
-                <div class="ticker-item"><img src="images/foto1.jpg" alt="Coquetel"><div class="overlay"><span>Coquetel</span></div></div>
-                <div class="ticker-item"><img src="images/foto2.jpg" alt="Coffee Break"><div class="overlay"><span>Coffee Break</span></div></div>
-                <div class="ticker-item"><img src="images/foto3.jpg" alt="Catering Premium"><div class="overlay"><span>Catering Premium</span></div></div>
-                <div class="ticker-item"><img src="images/foto4.jpg" alt="Evento Exclusivo"><div class="overlay"><span>Evento Exclusivo</span></div></div>
-                <div class="ticker-item"><img src="images/foto5.jpg" alt="Finger Food"><div class="overlay"><span>Finger Food</span></div></div>
+                <div class="ticker-item"><img src="images/foto1.jpg" alt="Coquetel">
+                    <div class="overlay"><span>Coquetel</span></div>
+                </div>
+                <div class="ticker-item"><img src="images/foto2.jpg" alt="Coffee Break">
+                    <div class="overlay"><span>Coffee Break</span></div>
+                </div>
+                <div class="ticker-item"><img src="images/foto3.jpg" alt="Catering Premium">
+                    <div class="overlay"><span>Catering Premium</span></div>
+                </div>
+                <div class="ticker-item"><img src="images/foto4.jpg" alt="Evento Exclusivo">
+                    <div class="overlay"><span>Evento Exclusivo</span></div>
+                </div>
+                <div class="ticker-item"><img src="images/foto5.jpg" alt="Finger Food">
+                    <div class="overlay"><span>Finger Food</span></div>
+                </div>
             </div>
         </div>
 
         <!-- Fileira 2 → direita -->
         <div class="ticker-wrapper fade-up" style="transition-delay: 0.1s;">
             <div class="ticker-track track-right">
-                <div class="ticker-item"><img src="foto1.jpeg" alt="Café da Manhã"><div class="overlay"><span>Café da Manhã</span></div></div>
-                <div class="ticker-item"><img src="foto2.jpeg" alt="Coffee Break"><div class="overlay"><span>Coffee Break</span></div></div>
-                <div class="ticker-item"><img src="foto3.jpeg" alt="Confraternização"><div class="overlay"><span>Confraternização</span></div></div>
-                <div class="ticker-item"><img src="foto4.jpeg" alt="Almoço Corporativo"><div class="overlay"><span>Almoço Corporativo</span></div></div>
-                <div class="ticker-item"><img src="foto5.jpeg" alt="Lançamento"><div class="overlay"><span>Lançamento</span></div></div>
+                <div class="ticker-item"><img src="foto1.jpeg" alt="Café da Manhã">
+                    <div class="overlay"><span>Café da Manhã</span></div>
+                </div>
+                <div class="ticker-item"><img src="foto2.jpeg" alt="Coffee Break">
+                    <div class="overlay"><span>Coffee Break</span></div>
+                </div>
+                <div class="ticker-item"><img src="foto3.jpeg" alt="Confraternização">
+                    <div class="overlay"><span>Confraternização</span></div>
+                </div>
+                <div class="ticker-item"><img src="foto4.jpeg" alt="Almoço Corporativo">
+                    <div class="overlay"><span>Almoço Corporativo</span></div>
+                </div>
+                <div class="ticker-item"><img src="foto5.jpeg" alt="Lançamento">
+                    <div class="overlay"><span>Lançamento</span></div>
+                </div>
                 <!-- duplicar -->
-                <div class="ticker-item"><img src="foto1.jpeg" alt="Café da Manhã"><div class="overlay"><span>Café da Manhã</span></div></div>
-                <div class="ticker-item"><img src="foto2.jpeg" alt="Coffee Break"><div class="overlay"><span>Coffee Break</span></div></div>
-                <div class="ticker-item"><img src="foto3.jpeg" alt="Confraternização"><div class="overlay"><span>Confraternização</span></div></div>
-                <div class="ticker-item"><img src="foto4.jpeg" alt="Almoço Corporativo"><div class="overlay"><span>Almoço Corporativo</span></div></div>
-                <div class="ticker-item"><img src="foto5.jpeg" alt="Lançamento"><div class="overlay"><span>Lançamento</span></div></div>
+                <div class="ticker-item"><img src="foto1.jpeg" alt="Café da Manhã">
+                    <div class="overlay"><span>Café da Manhã</span></div>
+                </div>
+                <div class="ticker-item"><img src="foto2.jpeg" alt="Coffee Break">
+                    <div class="overlay"><span>Coffee Break</span></div>
+                </div>
+                <div class="ticker-item"><img src="foto3.jpeg" alt="Confraternização">
+                    <div class="overlay"><span>Confraternização</span></div>
+                </div>
+                <div class="ticker-item"><img src="foto4.jpeg" alt="Almoço Corporativo">
+                    <div class="overlay"><span>Almoço Corporativo</span></div>
+                </div>
+                <div class="ticker-item"><img src="foto5.jpeg" alt="Lançamento">
+                    <div class="overlay"><span>Lançamento</span></div>
+                </div>
             </div>
         </div>
     </section>
