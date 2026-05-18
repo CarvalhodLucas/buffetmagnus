@@ -591,16 +591,17 @@
             position: relative;
         }
 
-        .timeline::before {
-            content: '';
+        .timeline-line {
             position: absolute;
             top: 30px;
             left: 0;
             right: 0;
             height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary) 10%, var(--primary) 90%, transparent);
-            border-bottom: 2px dashed var(--bg-light);
+            background: var(--primary);
             z-index: 0;
+            transform-origin: left center;
+            transform: scaleX(0);
+            opacity: 1;
         }
 
         .step {
@@ -1073,12 +1074,22 @@
                 flex-direction: column;
                 gap: 30px;
                 padding-left: 20px;
-                border-left: 2px solid #8B1A2A;
                 margin-left: 10px;
+                position: relative;
             }
 
-            .timeline::before {
-                display: none;
+            .timeline-line {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                width: 2px;
+                height: auto;
+                right: auto;
+                background: var(--primary);
+                transform-origin: top center;
+                transform: scaleY(0);
+                opacity: 1;
             }
 
             .step {
@@ -1248,7 +1259,7 @@
                             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;">
                     </div>
                     <div class="service-info">
-                        <h3 class="playfair">Café da Manhã Executivo</h3>
+                        <h3 class="playfair">Coffee Break</h3>
                         <p>Café, sucos naturais, salgados e doces. Montagem completa no espaço da sua empresa.</p>
                         <a href="https://wa.me/5521988341017" target="_blank" class="service-link">Saiba mais →</a>
                     </div>
@@ -1408,28 +1419,29 @@
             <h2 class="section-title fade-up" style="margin-bottom: 20px;">Simples assim</h2>
 
             <div class="timeline">
-                <div class="step fade-up">
+                <div class="timeline-line"></div>
+                <div class="step">
                     <div class="step-icon">📋</div>
                     <div>
                         <h3 class="playfair">Orçamento</h3>
                         <p>Preencha o formulário ou nos chame no WhatsApp. Resposta em até 2 horas.</p>
                     </div>
                 </div>
-                <div class="step fade-up" style="transition-delay: 0.15s;">
+                <div class="step">
                     <div class="step-icon">🤝</div>
                     <div>
                         <h3 class="playfair">Cardápio</h3>
                         <p>Montamos o cardápio ideal para o seu evento e número de pessoas.</p>
                     </div>
                 </div>
-                <div class="step fade-up" style="transition-delay: 0.3s;">
+                <div class="step">
                     <div class="step-icon">🚚</div>
                     <div>
                         <h3 class="playfair">Montagem</h3>
                         <p>Chegamos no horário, montamos tudo e cuidamos de cada detalhe.</p>
                     </div>
                 </div>
-                <div class="step fade-up" style="transition-delay: 0.45s;">
+                <div class="step">
                     <div class="step-icon">✅</div>
                     <div>
                         <h3 class="playfair">Seu Evento</h3>
@@ -1602,6 +1614,104 @@
             currentTesti = (currentTesti + 1) % testimonials.length;
             testimonials[currentTesti].classList.add('active');
         }, 4000);
+
+        // GSAP ScrollTrigger Timeline Animation
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+
+            const isMobile = window.innerWidth <= 768;
+            const timelineLine = document.querySelector('.timeline-line');
+            const steps = document.querySelectorAll('.step');
+
+            if (timelineLine && steps.length > 0) {
+                // Initialize starting states
+                steps.forEach(step => {
+                    gsap.set(step, { opacity: 0, y: 30 });
+                });
+                
+                // Hide line initially
+                gsap.set(timelineLine, { 
+                    opacity: 1, 
+                    scaleX: isMobile ? 1 : 0, 
+                    scaleY: isMobile ? 0 : 1 
+                });
+
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: '#como-funciona',
+                        start: 'top 75%',
+                        once: true
+                    }
+                });
+
+                if (isMobile) {
+                    // Mobile vertical drawing sequence
+                    steps.forEach((step, idx) => {
+                        const targetScaleY = (idx + 1) / steps.length;
+                        
+                        // Draw vertical segment to next step
+                        tl.to(timelineLine, {
+                            scaleY: targetScaleY,
+                            duration: 0.5,
+                            ease: 'power1.inOut'
+                        });
+
+                        // Fade in step and animate icon scale
+                        tl.to(step, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.6,
+                            ease: 'power2.out'
+                        }, '-=0.25');
+
+                        const icon = step.querySelector('.step-icon');
+                        if (icon) {
+                            tl.fromTo(icon,
+                                { scale: 0.85, borderColor: 'rgba(139, 26, 42, 0.2)' },
+                                { scale: 1.15, borderColor: '#8B1A2A', duration: 0.4, ease: 'back.out(1.7)' },
+                                '-=0.55'
+                            ).to(icon, { scale: 1, duration: 0.2 });
+                        }
+                    });
+                } else {
+                    // Desktop horizontal drawing sequence
+                    steps.forEach((step, idx) => {
+                        const targetScaleX = (idx + 1) / steps.length;
+                        
+                        // Draw horizontal segment to next step
+                        tl.to(timelineLine, {
+                            scaleX: targetScaleX,
+                            duration: 0.5,
+                            ease: 'power1.inOut'
+                        });
+
+                        // Fade in step and animate icon scale
+                        tl.to(step, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.6,
+                            ease: 'power2.out'
+                        }, '-=0.25');
+
+                        const icon = step.querySelector('.step-icon');
+                        if (icon) {
+                            tl.fromTo(icon,
+                                { scale: 0.85, borderColor: 'rgba(139, 26, 42, 0.2)' },
+                                { scale: 1.15, borderColor: '#8B1A2A', duration: 0.4, ease: 'back.out(1.7)' },
+                                '-=0.55'
+                            ).to(icon, { scale: 1, duration: 0.2 });
+                        }
+                    });
+                }
+
+                // Once entire timeline is active and complete, gracefully fade out the red line!
+                tl.to(timelineLine, {
+                    opacity: 0,
+                    duration: 0.8,
+                    ease: 'power2.inOut'
+                }, '+=0.3');
+            }
+        }
 
     </script>
 </body>
