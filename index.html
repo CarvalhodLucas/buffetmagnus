@@ -1334,7 +1334,7 @@
     <section id="galeria" class="gallery-section">
         <div class="gallery-header">
             <span class="section-tag fade-up" style="color: var(--primary);">NOSSA GALERIA</span>
-            <h2 class="section-title fade-up">Eventos que realizamos</h2>
+            <h2 class="section-title fade-up">Eventos realizados</h2>
         </div>
 
         <!-- Fileira 1 → esquerda -->
@@ -1438,7 +1438,7 @@
                     <div class="step-icon">🚚</div>
                     <div>
                         <h3 class="playfair">Montagem</h3>
-                        <p>Chegamos no horário, montamos tudo e cuidamos de cada detalhe.</p>
+                        <p>Montamos tudo e cuidamos de cada detalhe.</p>
                     </div>
                 </div>
                 <div class="step">
@@ -1628,12 +1628,12 @@
                 steps.forEach(step => {
                     gsap.set(step, { opacity: 0, y: 30 });
                 });
-                
+
                 // Hide line initially
-                gsap.set(timelineLine, { 
-                    opacity: 1, 
-                    scaleX: isMobile ? 1 : 0, 
-                    scaleY: isMobile ? 0 : 1 
+                gsap.set(timelineLine, {
+                    opacity: 1,
+                    scaleX: isMobile ? 1 : 0,
+                    scaleY: isMobile ? 0 : 1
                 });
 
                 const tl = gsap.timeline({
@@ -1648,7 +1648,7 @@
                     // Mobile vertical drawing sequence
                     steps.forEach((step, idx) => {
                         const targetScaleY = (idx + 1) / steps.length;
-                        
+
                         // Draw vertical segment to next step
                         tl.to(timelineLine, {
                             scaleY: targetScaleY,
@@ -1677,7 +1677,7 @@
                     // Desktop horizontal drawing sequence
                     steps.forEach((step, idx) => {
                         const targetScaleX = (idx + 1) / steps.length;
-                        
+
                         // Draw horizontal segment to next step
                         tl.to(timelineLine, {
                             scaleX: targetScaleX,
